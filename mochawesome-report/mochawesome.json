@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-06-26T12:00:05.743Z",
+    "end": "2020-06-26T12:00:05.817Z",
+    "duration": 74,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1e0c3268-166e-41a5-b7e4-668e4015f46b",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+          "title": "CRUD Operations",
+          "fullFile": "/Users/krunalgaidhar/Development/SelfStudy/nodeJS/expressTutorial/test/test.js",
+          "file": "/test/test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should Create a Course",
+              "fullTitle": "CRUD Operations Should Create a Course",
+              "timedOut": false,
+              "duration": 45,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const course = {\n    name: faker.random.words(),\n}\nchai.request(app)\n    .post(\"/api/courses\")\n    .send(course)\n    .end((err, res)=>{\n        if (err) return done(err);\n        console.log(\"----------------------------------------------------------------------\");\n        console.log(\"\\n\");\n        console.log(\"Check Status Code: \", expect(res.status).to.be.equal(200));\n        console.log(\"Check Body is an Array: \", expect(res.body).to.be.instanceOf(Object));\n        console.log(\"Check the body have property named name: \", expect(res.body).to.have.property('name').equals(course.name))\n        createdID.push(res.body.id)\n        done()\n    })",
+              "err": {},
+              "uuid": "93fb3760-94b5-4ba9-a310-e888f413ce99",
+              "parentUUID": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should NOT Create a course without name",
+              "fullTitle": "CRUD Operations Should NOT Create a course without name",
+              "timedOut": false,
+              "duration": 5,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const course = {}\nchai\n  .request(app)\n  .post('/api/courses')\n  .send(course)\n  .end((err, res) => {\n    console.log(\"----------------------------------------------------------------------\");\n    console.log(\"\\n\");\n    console.log(\"Check Status Code: \", expect(res.status).to.be.equal(400));\n    console.log(\"Check Error Message Present: \", expect(res).to.have.property('error'));\n    console.log(\"Error Response: \", res.text);\n    done()\n  })",
+              "err": {},
+              "uuid": "fe53e441-fa12-4eeb-8f47-cdfca9b1351d",
+              "parentUUID": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should Fetch all the Courses",
+              "fullTitle": "CRUD Operations Should Fetch all the Courses",
+              "timedOut": false,
+              "duration": 4,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai.request(app)\n    .get(\"/api/courses\")\n    .end((err, res)=>{\n        console.log(\"----------------------------------------------------------------------\");\n        console.log(\"\\n\");\n        console.log(\"Check Status Code: \", expect(res.status).to.be.equal(200));\n        console.log(\"Check Response is JSON: \", expect(res).to.be.json);\n        console.log(\"Check Response is not null: \", expect(res.body).to.exist);\n        console.log(\"Check Body is an Array: \", expect(res.body).to.be.instanceOf(Array));\n        console.log(\"Check Body includes Objects: \", expect(res.body[0]).to.be.instanceOf(Object));\n        \n        done()\n    })",
+              "err": {},
+              "uuid": "a700780a-546f-4bbf-b15d-9aeac04cac87",
+              "parentUUID": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should Fecth Course with specific id",
+              "fullTitle": "CRUD Operations Should Fecth Course with specific id",
+              "timedOut": false,
+              "duration": 3,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const id = createdID.slice(-1).pop()\nchai.request(app)\n    .get(`/api/courses/${id}`)\n    .end((err, res)=>{\n        console.log(\"----------------------------------------------------------------------\");\n        console.log(\"\\n\");\n        console.log(\"Check Status Code: \", expect(res.status).to.be.equal(200));\n        console.log(\"Check Body is an Object: \", expect(res.body).to.be.instanceOf(Object));\n        console.log(\"Check the body have property name: \", expect(res.body).to.have.property('name'))\n        console.log(\"Check the body have property id as expected: \", expect(res.body).to.have.property('id').equals(id))\n        done()\n    })",
+              "err": {},
+              "uuid": "08d7ff85-a75d-41db-bca2-3e056a01f938",
+              "parentUUID": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should Update an existing Course",
+              "fullTitle": "CRUD Operations Should Update an existing Course",
+              "timedOut": false,
+              "duration": 3,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const id = createdID.slice(-1).pop()\nconst course = {\n    name: \"Course Updated\",\n  }\nchai.request(app)\n    .put(`/api/courses/${id}`)\n    .send(course)\n    .end((err, res)=>{\n        console.log(\"----------------------------------------------------------------------\");\n        console.log(\"\\n\");\n        console.log(\"Check Status Code: \", expect(res.status).to.be.equal(200));\n        console.log(\"Check Body is an Object: \", expect(res.body).to.be.instanceOf(Object));\n        console.log(\"Check the body have property id as expected:\", expect(res.body).to.have.property('id').eql(id))\n        console.log(\"Check the body have property named name: \", expect(res.body).to.have.property('name').equals(course.name))\n        createdID.push(res.body.id)\n        done()\n    })",
+              "err": {},
+              "uuid": "d93fdf18-8bc0-4f1b-a84e-fc15d02b36d0",
+              "parentUUID": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should Delete an existing Course",
+              "fullTitle": "CRUD Operations Should Delete an existing Course",
+              "timedOut": false,
+              "duration": 7,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const id = createdID.slice(-1).pop()\n\nchai.request(app)\n    .delete(`/api/courses/${id}`)\n    .end((err, res)=>{\n        console.log(\"----------------------------------------------------------------------\");\n        console.log(\"\\n\");\n        console.log(\"Check Status Code : \", expect(res.status).to.be.equal(200));\n        console.log(\"Check Body is an Object: \", expect(res.body).to.be.instanceOf(Object));\n        console.log(\"Check the body have property id as expected:\", expect(res.body).to.have.property('id').eql(id))\n        chai.request(app)\n        .get(`/api/courses/${res.body.id}`)\n        .end((err, res)=>{\n            console.log(\"\\n\");\n            console.log(\"Check Status Code : \", expect(res.status).to.be.equal(404));\n            done()\n        })\n    })",
+              "err": {},
+              "uuid": "00e4a219-abf5-4c39-848b-6b1b5e836baf",
+              "parentUUID": "a4cc710a-5608-4e0f-9884-0cef52009f74",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "93fb3760-94b5-4ba9-a310-e888f413ce99",
+            "fe53e441-fa12-4eeb-8f47-cdfca9b1351d",
+            "a700780a-546f-4bbf-b15d-9aeac04cac87",
+            "08d7ff85-a75d-41db-bca2-3e056a01f938",
+            "d93fdf18-8bc0-4f1b-a84e-fc15d02b36d0",
+            "00e4a219-abf5-4c39-848b-6b1b5e836baf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 67,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "8.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "5.1.0"
+    }
+  }
+}
